@@ -11,7 +11,7 @@ const Navbar = () => {
                 <div>Github</div>
                 <div>Email</div>
             </div>
-            <div className={styles.logo}>Isaac's BlogNews App</div>
+            <div className={styles.logo}>Isaac BlogNews App</div>
             <div className={styles.links}>
                 <ThemeToggle />
                 <Link href="/">Homepage</Link>
