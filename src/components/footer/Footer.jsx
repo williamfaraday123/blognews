@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CategoryList from "../categoryList/CategoryList";
 import styles from "./footer.module.css";
 
