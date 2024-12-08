@@ -2,13 +2,13 @@ import connectToDatabase from '../db';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { username, publishDate, content } = req.body;
+    const { username, content } = req.body;
 
     try {
       const db = await connectToDatabase();
       await db.run(
-        'INSERT INTO Blog (username, publishDate, content) VALUES (?, ?, ?)',
-        [username, publishDate, content]
+        'INSERT INTO Blog (username, content) VALUES (?, ?, ?)',
+        [username, content]
       );
       res.status(200).json({ message: 'Blog post created successfully!' });
     } catch (error) {

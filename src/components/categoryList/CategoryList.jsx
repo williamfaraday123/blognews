@@ -6,8 +6,9 @@ const CategoryList = () => {
         <div className={styles.container}>
             <h1 className={styles.title}>Popular Categories</h1>
             <div className={styles.categories}>
-                {["style", "fashion", "food", "travel"].map((category) => (
+                {["style", "fashion", "food", "travel"].map((category, index) => (
                     <Link 
+                        key = {index}
                         href={`/blog/${category}`}
                         className={styles.category}
                     >
