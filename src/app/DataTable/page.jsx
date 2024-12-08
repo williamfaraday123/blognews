@@ -1,20 +1,21 @@
+"use client"
+
 import { useEffect, useState } from "react";
-import connectToDatabase from "../api/db";
 
 const DataTable = () => {
-    const tables = ["User", "Blog"];
     const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const db = await connectToDatabase();
-                const tableData = {};
-                tables.forEach((table) => {
-                    const rows = await db.all(`SELECT * FROM ${table}`);
-                    tableData[table] = rows;
-                });
+                const response = await fetch("/api/database/getAll");
+                if(!response.ok) {
+                    throw error;
+                }
+                const tableData = await response.json();
                 setData(tableData);
+                setLoading(false);
             } catch (err) {
                 alert('Error fetching data from database', err);
             }
@@ -22,9 +23,12 @@ const DataTable = () => {
         fetchData();
     }, []);
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
     return (
         <div>
-            {tables.map((table, index) => (
+            {Object.keys(data).map((table, index) => (
                 <div key={index}>
                     <h3>{table}</h3>
                     <pre>{JSON.stringify(data[table], null, 2)}</pre>

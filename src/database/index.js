@@ -1,3 +1,14 @@
-import initializeDatabase from "./dbSetup";
+const initializeDB = async () => {
+    const response = await fetch('/api/database/initializeDB', {
+        method: 'POST'
+    });
 
-initializeDatabase(); // Initialize the database when the app starts
+    if (response.ok) {
+        const data = await response.json();
+        console.log(data.message);
+    } else {
+        console.error('Failed to initialize database');
+    }
+};
+
+initializeDB();

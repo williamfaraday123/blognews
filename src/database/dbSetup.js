@@ -19,6 +19,7 @@ const initializeDatabase = async () => {
         return db;
     } catch (err) {
         console.error('Error initializing database:', err);
+        throw err;
     }
 }
 
