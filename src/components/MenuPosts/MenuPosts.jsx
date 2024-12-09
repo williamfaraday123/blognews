@@ -4,8 +4,8 @@ import styles from "./menuPosts.module.css";
 const MenuPosts = () => {
     return (
         <div className={styles.items}>
-            {[1, 2, 3, 4].map((item) => (
-                <Link href="/" className={styles.item}>
+            {[1, 2, 3, 4].map((item, index) => (
+                <Link key={index} href="/" className={styles.item}>
                     <div className={styles.imageContainer}>
                         <img
                             src="https://picsum.photos/200/300"
