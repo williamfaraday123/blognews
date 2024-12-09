@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     try {
       const db = await connectToDatabase();
       await db.run(
-        'INSERT INTO Blog (username, content) VALUES (?, ?, ?)',
+        'INSERT INTO Blog (username, content) VALUES (?, ?)',
         [username, content]
       );
       res.status(200).json({ message: 'Blog post created successfully!' });
