@@ -25,6 +25,7 @@ export async function POST (req) {
         );
         return NextResponse.json({ message: 'Successful registration' }, { status: 201 });
     } catch (err) {
+        console.error('error in src/app/api/user/register/route.js:', err);
         return NextResponse.json({ error: err }, { status: 500 });
     }
 }
