@@ -7,8 +7,8 @@ const CardList = () => {
         <div className={styles.container}>
             <h1 className={styles.title}>Recent Posts</h1>
             <div className={styles.posts}>
-                {[1, 2, 3, 4].map((card) => (
-                    <Card />
+                {[1, 2, 3, 4].map((card, index) => (
+                    <Card key={index} />
                 ))}
             </div>
             <Pagination />

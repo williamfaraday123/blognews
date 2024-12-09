@@ -6,7 +6,10 @@ const AuthLinks = () => {
     return (
         <>
             {status === "notauthenticated" ? (
-                <Link href="/login">Login</Link>
+                <>
+                    <Link href="/login">Login</Link>
+                    <Link href="/register">Register</Link>
+                </>
             ) : (
                 <>
                     <Link href="/write">Write</Link>

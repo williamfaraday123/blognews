@@ -1,8 +1,8 @@
--- user
+-- User
 CREATE TABLE IF NOT EXISTS User (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
+    password TEXT NOT NULL
 );
 
 --Blog
@@ -12,6 +12,6 @@ CREATE TABLE IF NOT EXISTS Blog (
     publishDate DATETIME DEFAULT CURRENT_TIMESTAMP,
     content TEXT NOT NULL,
     FOREIGN KEY (username) REFERENCES User(username)
-)
+);
 
 CREATE INDEX IF NOT EXISTS idx_blog_username ON Blog(username);

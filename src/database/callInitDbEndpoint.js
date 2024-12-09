@@ -11,4 +11,4 @@ const initializeDB = async () => {
     }
 };
 
-initializeDB();
+export default initializeDB;
