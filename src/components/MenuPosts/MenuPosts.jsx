@@ -1,28 +1,45 @@
-import Link from "next/link";
+"use client"
+
+import { useBlogContext } from "@/context/BlogContext";
+import { useEffect, useState } from "react";
+import Card from "../card/Card";
 import styles from "./menuPosts.module.css";
 
 const MenuPosts = () => {
+    const [blogs, setBlogs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    
+    const { blogsChanged } = useBlogContext();
+
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                const response = await fetch("/api/blog/read");
+                if (!response.ok) {
+                    throw error;
+                }
+                const rows = await response.json();
+                setBlogs(rows);
+            } catch (err) {
+                alert(`Cannot fetch blogs: ${err.message}`);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchBlogs();
+    }, [blogsChanged]);
+
+    if (loading) {
+        return <div>Loading MenuPosts...</div>;
+    }
     return (
         <div className={styles.items}>
-            {[1, 2, 3, 4].map((item, index) => (
-                <Link key={index} href="/" className={styles.item}>
-                    <div className={styles.imageContainer}>
-                        <img
-                            src="https://picsum.photos/200/300"
-                            alt=""
-                            fill
-                            className={styles.image}
-                        />
-                    </div>
-                    <div className={styles.textContainer}>
-                        <span className={styles.category}>category</span>
-                        <h3 className={styles.postTitle}>Title</h3>
-                        <div className={styles.detail}>
-                            <span className={styles.username}>Isaac</span>
-                            <span className={styles.date}>10.03.2023</span>
-                        </div>
-                    </div>
-                </Link>
+            {blogs.map((blog, index) => (
+                <Card
+                    key={index}
+                    blog={blog}
+                />
             ))}
         </div>
     );

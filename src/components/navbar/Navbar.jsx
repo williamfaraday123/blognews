@@ -12,11 +12,12 @@ const Navbar = () => {
                 <div>Email</div>
             </div>
             <div className={styles.logo}>Isaac BlogNews App</div>
+            <p>
+                <b>This is a blog news app created by Isaac</b>
+            </p>
             <div className={styles.links}>
                 <ThemeToggle />
                 <Link href="/" className={styles.link}>Homepage</Link>
-                <Link href="/contact" className={styles.link}>Contact</Link>
-                <Link href="/about" className={styles.link}>About</Link>
                 <AuthLinks />
             </div>
         </div>

@@ -1,17 +1,48 @@
+"use client"
+
+import { useBlogContext } from "@/context/BlogContext";
+import { useEffect, useState } from "react";
 import Card from "../card/Card";
-import Pagination from "../pagination/Pagination";
 import styles from "./cardList.module.css";
 
-const CardList = () => {
+const CardList = ({ selectedCategory }) => {
+    const [blogs, setBlogs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const { blogsChanged } = useBlogContext();
+
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                const response = await fetch(`/api/blog/read?category=${selectedCategory}`);
+                if (!response.ok) {
+                    throw error;
+                }
+                const rows = await response.json();
+                setBlogs(rows);
+                setLoading(false);
+            } catch (error) {
+                alert(`Error in fetching blogs ${error}`);
+            }
+        }
+
+        if (selectedCategory)
+            fetchBlogs();
+    }, [selectedCategory, blogsChanged]);
+
+    if (loading) {
+        return <div>Loading CardList...</div>;
+    }
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Recent Posts</h1>
+            <h1 className={styles.title}>{selectedCategory}</h1>
             <div className={styles.posts}>
-                {[1, 2, 3, 4].map((card, index) => (
-                    <Card key={index} />
+                {blogs.map((blog, index) => (
+                    <Card
+                        key={index}
+                        blog={blog}
+                    />
                 ))}
             </div>
-            <Pagination />
         </div>
     );
 };

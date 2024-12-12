@@ -1,4 +1,5 @@
 "use client"
+import { useAuth } from '@/context/AuthContext'; //Uses the context for login() function wich will handle login and update the authentication state
 import axios from 'axios';
 import { useState } from 'react';
 import styles from "./loginPage.module.css";
@@ -12,6 +13,9 @@ const LoginPage = () => {
         });
         return initialFormData;
     });
+
+    const { login } = useAuth();
+
     const handleChange = (e, field) => {
         setFormData((prevFields) => ({
             ...prevFields,
@@ -22,8 +26,8 @@ const LoginPage = () => {
         e.preventDefault();
         try {
             const res = await axios.post('/api/user/login', formData);
-            console.log(res.data);
             alert(`formData posted successfully, ${JSON.stringify(res?.data?.message)}`);
+            login(formData["username"]);
         } catch (error) {
             alert('Error posting formData', error);
         }

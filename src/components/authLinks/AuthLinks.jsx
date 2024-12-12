@@ -1,11 +1,16 @@
+"use client"
+
+import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import styles from "./authLinks.module.css";
 
+//uses the authContext to display appropriate links based on auth status
 const AuthLinks = () => {
-    const status = "notauthenticated"
+    const { authenticated, logout } = useAuth();
+
     return (
         <>
-            {status === "notauthenticated" ? (
+            {!authenticated ? (
                 <>
                     <Link href="/login">Login</Link>
                     <Link href="/register">Register</Link>
@@ -13,7 +18,8 @@ const AuthLinks = () => {
             ) : (
                 <>
                     <Link href="/write">Write</Link>
-                    <span className={styles.link}>Logout</span>
+                    <Link href="/my-blogs">My blogs</Link>
+                    <span className={styles.link} onClick={logout}>Logout</span>
                 </>
             )}
         </>

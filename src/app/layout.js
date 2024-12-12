@@ -1,5 +1,7 @@
 import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/navbar/Navbar";
+import { AuthProvider } from "@/context/AuthContext";
+import { BlogContextProvider } from "@/context/BlogContext";
 import { ThemeContextProvider } from "@/context/ThemeContext";
 import ThemeProvider from "@/providers/ThemeProvider";
 import localFont from "next/font/local";
@@ -27,17 +29,21 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeContextProvider>
-          <ThemeProvider>
-            <div className="container">
-              <div className="wrapper">
-                <Navbar />
-                {children}
-                <Footer />
-              </div>
-            </div>
-          </ThemeProvider>
-        </ThemeContextProvider>
+        <AuthProvider>
+          <ThemeContextProvider>
+            <ThemeProvider>
+              <BlogContextProvider>
+                <div className="container">
+                  <div className="wrapper">
+                    <Navbar />
+                    {children}
+                    <Footer />
+                  </div>
+                </div>
+              </BlogContextProvider>
+            </ThemeProvider>
+          </ThemeContextProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,19 +1,20 @@
-import Link from "next/link";
+"use client"
+
 import styles from "./categoryList.module.css";
 
-const CategoryList = () => {
+const CategoryList = ({ handleSelectCategory }) => {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Popular Categories</h1>
             <div className={styles.categories}>
                 {["style", "fashion", "food", "travel"].map((category, index) => (
-                    <Link 
+                    <button
                         key = {index}
-                        href={`/blog/${category}`}
+                        onClick={() => handleSelectCategory(category)}
                         className={styles.category}
                     >
                         {category}
-                    </Link>
+                    </button>
                 ))}
             </div>
         </div>
