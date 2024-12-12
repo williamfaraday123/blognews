@@ -36,10 +36,11 @@ const MenuPosts = () => {
     return (
         <div className={styles.items}>
             {blogs.map((blog, index) => (
-                <Card
-                    key={index}
-                    blog={blog}
-                />
+                <div key={index} className={styles.item}>
+                    <Card
+                        blog={blog}
+                    />
+                </div>
             ))}
         </div>
     );

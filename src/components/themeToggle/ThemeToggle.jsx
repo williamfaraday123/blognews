@@ -15,9 +15,9 @@ const ThemeToggle = () => {
 
     const { theme, toggle } = context || {}; // Ensure context is not null/undefined
     return (
-        <div className={styles.container} onClick={toggle}>
-            {theme === "light" ? "dark mode" : "light mode"}
-        </div>
+        <button className={styles.container} onClick={toggle}>
+            Switch to {theme === "light" ? "dark mode" : "light mode"}
+        </button>
     );
 };
 

@@ -63,8 +63,13 @@ const Write = () => {
                 placeholder="Title"
                 value={formData.title}
                 onChange={(e) => handleChange(e, 'title')}
+                className={styles.input}
             />
-            <select value={formData.category} onChange={(e) => handleChange(e, 'category')}>
+            <select
+                value={formData.category}
+                onChange={(e) => handleChange(e, 'category')}
+                className={styles.input}
+            >
                 {["style", "fashion", "food", "travel"].map((category, index) => (
                     <option key={index} value={category}>{category}</option>
                 ))}
@@ -73,11 +78,13 @@ const Write = () => {
                 <input
                     type="file"
                     onChange={(e) => handleChange(e, 'image')}
+                    className={styles.file}
                 />
                 <textarea
                     placeholder="Tell your story..."
                     value={formData.description}
                     onChange={(e) => handleChange(e, 'description')}
+                    className={styles.input}
                 />
                 <button className={styles.button} onClick={handleSubmit}>Publish</button>
             </div>

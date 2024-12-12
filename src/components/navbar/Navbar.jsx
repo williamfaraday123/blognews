@@ -12,7 +12,7 @@ const Navbar = () => {
                 <div>Email</div>
             </div>
             <div className={styles.logo}>Isaac BlogNews App</div>
-            <p>
+            <p className={styles.description}>
                 <b>This is a blog news app created by Isaac</b>
             </p>
             <div className={styles.links}>

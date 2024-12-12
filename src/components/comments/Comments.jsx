@@ -79,8 +79,8 @@ const Comments = ({ BlogID }) => {
                 <Link href="/login">Login to write a comment</Link>
             )}
             <div className={styles.comments}>
-                {comments?.map((comment) => (
-                    <div className={styles.comment}>
+                {comments?.map((comment, index) => (
+                    <div key={index} className={styles.comment}>
                         <div className={styles.userInfo}>
                             <span className={styles.username}>{comment?.username}</span>
                             <span className={styles.date}>{comment?.createdAt}</span>

@@ -24,19 +24,40 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
+/* 
 .dark {
   --bg: #0f172a;
   --textColor: #ddd;
   --softBg: #1f273a;
   --softTextColor: black;
 }
+ */
 
+.dark {
+  --bg: #343a40;
+  --textColor: #f8f9fa;
+  --secondary-text-color: #adb5bd;
+  --primary-color: #0d6efd;
+  --primary-color-hover: #0b5ed7;
+  --card-background-color: #495057;
+}
+
+/* 
 .light {
   --bg: white;
   --textColor: black;
   --softBg: #f0f0f0;
   --softTextColor: black;
+}
+ */
+
+.light {
+  --bg: #f8f9fa;
+  --textColor: #343a40;
+  --secondary-text-color: #6c757d;
+  --primary-color: #007bff;
+  --primary-color-hover: #0056b3;
+  --card-background-color: white;
 }
 
 .container {
@@ -83,8 +104,4 @@ a {
 
 .ql-container{
   font-size: 28px !important;
-}
-
-.quill > .ql-container > .ql-editor.ql-blank::before{
-  color: #b3b3b1;
 }

@@ -1,0 +1,46 @@
+/* loginPage.module.css */
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--secondary-text-color);
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.button:hover {
+    background-color: var(--primary-color-hover);
+    color: var(--background-color);
+}

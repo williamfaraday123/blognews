@@ -2,7 +2,7 @@ import connectToDatabase from '@/app/api/db';
 import { NextResponse } from "next/server";
 
 export async function GET () {
-    const tables = ["User", "Blog"];
+    const tables = ["User", "Blog", "Comment"];
     const tableData = {};
 
     try {

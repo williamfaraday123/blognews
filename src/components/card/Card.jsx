@@ -82,13 +82,13 @@ const Card = ({ blog }) => {
                     <span className={styles.date}>{blog?.publishDate}</span>
                 </div>
                 <div>
-                    <button onClick={toggleViewDescription}>Read More</button>
+                    <button onClick={toggleViewDescription} className={styles.button}>Read More</button>
                     {viewDescription && (
                         <div>{blog?.description}</div>
                     )}
                 </div>
                 <div>
-                    <button onClick={toggleViewComments}>Comments</button>
+                    <button onClick={toggleViewComments} className={styles.button}>Comments</button>
                     {viewComments && (
                         <Comments BlogID={blog?.id} />
                     )}
@@ -96,8 +96,8 @@ const Card = ({ blog }) => {
                 <div>
                     {token === blog?.username && (
                         <>
-                            <button onClick={deleteBlog}>delete</button>
-                            <button onClick={toggleEditing}>edit</button>
+                            <button onClick={deleteBlog} className={styles.button}>delete</button>
+                            <button onClick={toggleEditing} className={styles.button}>edit</button>
                         </>
                     )}
                 </div>
@@ -109,23 +109,30 @@ const Card = ({ blog }) => {
                                 <input
                                     value={editFormData.title}
                                     onChange={(e) => handleChange(e, 'title')}
+                                    className={styles.input}
                                 />
                             </div>
                             <div>
                                 <label>category</label>
-                                <input
+                                <select
                                     value={editFormData.category}
                                     onChange={(e) => handleChange(e, 'category')}
-                                />
+                                    className={styles.input}
+                                >
+                                    {["style", "fashion", "food", "travel"].map((category, index) => (
+                                        <option key={index} value={category}>{category}</option>
+                                    ))}
+                                </select>
                             </div>
                             <div>
                                 <label>description</label>
                                 <textarea
                                     value={editFormData.description}
                                     onChange={(e) => handleChange(e, 'description')}
+                                    className={styles.input}
                                 />
-                                <button onClick={updateBlog}>Save</button>
-                                <button onClick={toggleEditing}>Cancel</button>
+                                <button onClick={updateBlog} className={styles.button}>Save</button>
+                                <button onClick={toggleEditing} className={styles.button}>Cancel</button>
                             </div>
                         </div>
                     )}

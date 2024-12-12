@@ -1,0 +1,23 @@
+/* menuPosts.module.css */
+.items {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    scroll-snap-type: x mandatory;
+}
+
+.item {
+    flex: 0 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+    scroll-snap-align: start;
+}
+
+.item:hover {
+    transform: translateY(-5px);
+}
