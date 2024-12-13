@@ -7,9 +7,15 @@ const Footer = () => {
             <div className={styles.logo}>Isaac BlogNews App</div>
             <p className={styles.desc}>This is a blog news app created by Isaac</p>
             <div className={styles.social}>
-                <div>About myself</div>
-                <div>Github</div>
-                <div>Email</div>
+                <div>
+                    <Link href="https://isaac-seven.vercel.app/">About myself</Link>
+                </div>
+                <div>
+                    <Link href="https://github.com/williamfaraday123">Github</Link>
+                </div>
+                <div>
+                    <a href="mailto:isaa0015@e.ntu.edu.sg">Email</a>
+                </div>
             </div>
             <div className={styles.links}>
                 <Link href="/" className={styles.link}>Homepage</Link>
