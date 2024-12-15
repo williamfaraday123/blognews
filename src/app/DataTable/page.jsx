@@ -6,6 +6,11 @@ import { useEffect, useState } from "react";
 const DataTable = () => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
+    const [deleted, setDeleted] = useState(false);
+
+    const toggleDeleted = () => {
+        setDeleted((prevState) => !prevState);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,7 +27,7 @@ const DataTable = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [deleted]);
 
     const handleDelete = async (table, rowId) => {
         try {
@@ -32,6 +37,7 @@ const DataTable = () => {
             };
             const response = await axios.post(`/api/database/delete`, formData);
             alert(`Successfully deleted from ${table} where id = ${rowId}, ${response.data.message}`);
+            toggleDeleted();
         } catch (error) {
             alert(`Error in deleting, ${error.message}`);
         }
