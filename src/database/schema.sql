@@ -29,3 +29,23 @@ CREATE TABLE IF NOT EXISTS Comment (
 );
 
 CREATE INDEX IF NOT EXISTS idx_blog_username ON Blog(username);
+
+--Trigger upon deleting a row in User
+CREATE TRIGGER IF NOT EXISTS deleteUserTrigger
+AFTER DELETE ON User
+FOR EACH ROW
+BEGIN
+    DELETE FROM Blog
+    WHERE username = OLD.username;
+    DELETE FROM Comment
+    WHERE username = OLD.username;
+END;
+
+--Trigger upon deleting a row in Blog
+CREATE TRIGGER IF NOT EXISTS deleteBlogTrigger
+AFTER DELETE ON Blog
+FOR EACH ROW
+BEGIN
+    DELETE FROM Comment
+    WHERE BlogID = OLD.id;
+END;

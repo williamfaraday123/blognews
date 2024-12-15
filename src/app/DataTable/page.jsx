@@ -1,5 +1,6 @@
 "use client"
 
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 const DataTable = () => {
@@ -23,6 +24,19 @@ const DataTable = () => {
         fetchData();
     }, []);
 
+    const handleDelete = async (table, rowId) => {
+        try {
+            const formData = {
+                table,
+                rowId
+            };
+            const response = await axios.post(`/api/database/delete`, formData);
+            alert(`Successfully deleted from ${table} where id = ${rowId}, ${response.data.message}`);
+        } catch (error) {
+            alert(`Error in deleting, ${error.message}`);
+        }
+    };
+    
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -31,7 +45,12 @@ const DataTable = () => {
             {Object.keys(data).map((table, index) => (
                 <div key={index}>
                     <h3>{table}</h3>
-                    <pre>{JSON.stringify(data[table], null, 2)}</pre>
+                    {data[table].map((row) => (
+                        <div key={row.id}>
+                            <pre>{JSON.stringify(row, null, 2)}</pre>
+                            <button onClick={() => handleDelete(table, row.id)}>Delete</button>
+                        </div>
+                    ))}
                 </div>
             ))}
         </div>
