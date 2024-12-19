@@ -105,6 +105,7 @@ BEGIN
     IF NOT EXISTS (
         SELECT 1 FROM pg_trigger WHERE tgname = 'deleteUserTrigger'
     ) THEN
+        DROP TRIGGER IF EXISTS deleteUserTrigger ON "User";
         CREATE TRIGGER deleteUserTrigger
         AFTER DELETE ON "User"
         FOR EACH ROW
@@ -114,11 +115,13 @@ END;
 $$;
 
 -- Trigger upon deleting a row in Blog
+
 DO $$
 BEGIN
     IF NOT EXISTS (
         SELECT 1 FROM pg_trigger WHERE tgname = 'deleteBlogTrigger'
     ) THEN
+        DROP TRIGGER IF EXISTS deleteBlogTrigger ON "Blog";
         CREATE TRIGGER deleteBlogTrigger
         AFTER DELETE ON "Blog"
         FOR EACH ROW

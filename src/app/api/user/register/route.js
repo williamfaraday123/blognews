@@ -11,7 +11,7 @@ export async function POST (req) {
 
         //check if account exists
         const res = await client.query(
-            'SELECT * FROM User WHERE username = $1',
+            'SELECT * FROM "User" WHERE username = $1',
             [username]
         );
 
