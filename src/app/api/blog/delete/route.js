@@ -1,4 +1,4 @@
-import connectToDatabase from "@/app/api/db";
+import { pool } from "@/app/api/db";
 import { NextResponse } from "next/server";
 
 export async function POST (req) {
@@ -6,11 +6,13 @@ export async function POST (req) {
         const formData = await req.json();
         const { BlogID, username } = formData;
         
-        const db = await connectToDatabase();
-        await db.run(
-            `DELETE FROM Blog WHERE id = ? AND username = ?`,
+        const client = await pool.connect();
+        await client.query(
+            `DELETE FROM "Blog" WHERE id = $1 AND username = $2`,
             [BlogID, username]
         );
+
+        client.release();
 
         return NextResponse.json({ message: 'Blog deleted successfully' }, { status: 200 });
     } catch (err) {

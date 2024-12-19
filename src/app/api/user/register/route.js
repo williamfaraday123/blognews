@@ -1,5 +1,5 @@
+import { pool } from "@/app/api/db";
 import { NextResponse } from "next/server";
-import connectToDatabase from "../../db";
 
 export async function POST (req) {
     try {
@@ -7,20 +7,20 @@ export async function POST (req) {
         const { username, password } = formData;
 
         //open database
-        const db = await connectToDatabase();
+        const client = await pool.connect();
 
         //check if account exists
-        const userExists = await db.get(
-            'SELECT * FROM User WHERE username = ?',
+        const res = await client.query(
+            'SELECT * FROM "User" WHERE username = $1',
             [username]
         );
 
-        if (userExists) {
+        if (res.rows.length > 0) {
             return NextResponse.json({ error: 'User with this username already exists'}, { status: 409 });
         }
 
-        await db.run(
-            `INSERT INTO User (username, password) VALUES (?, ?)`,
+        await client.query(
+            `INSERT INTO "User" (username, password) VALUES ($1, $2)`,
             [username, password]
         );
         return NextResponse.json({ message: 'Successful registration' }, { status: 201 });
