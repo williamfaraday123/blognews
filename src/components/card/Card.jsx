@@ -2,10 +2,10 @@
 
 import categories from "@/components/categoryList/categoryList.json";
 import Comments from "@/components/comments/Comments";
+import Likes from "@/components/likes";
 import { useBlogContext } from "@/context/BlogContext";
 import axios from "axios";
 import { useState } from "react";
-import Likes from "../likes";
 import styles from "./card.module.css";
 
 const Card = ({ blog }) => {
