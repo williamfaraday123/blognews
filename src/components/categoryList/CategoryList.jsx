@@ -1,5 +1,6 @@
 "use client"
 
+import categories from "@/components/categoryList/categoryList.json";
 import styles from "./categoryList.module.css";
 
 const CategoryList = ({ handleSelectCategory }) => {
@@ -7,7 +8,7 @@ const CategoryList = ({ handleSelectCategory }) => {
         <div className={styles.container}>
             <h1 className={styles.title}>Popular Categories</h1>
             <div className={styles.categories}>
-                {["style", "fashion", "food", "travel"].map((category, index) => (
+                {categories.map((category, index) => (
                     <button
                         key = {index}
                         onClick={() => handleSelectCategory(category)}
