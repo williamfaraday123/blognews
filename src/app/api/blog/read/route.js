@@ -1,4 +1,4 @@
-import connectToDatabase from "@/app/api/db";
+import { pool } from "@/app/api/db";
 import { NextResponse } from "next/server";
 
 export async function GET (req) {
@@ -7,21 +7,25 @@ export async function GET (req) {
         const category = searchParams.get('category');
         const username = searchParams.get('username');
 
-        const db = await connectToDatabase();
-        let rows;
+        const client = await pool.connect();
+        let res;
 
         if (category && username) {
-            rows = await db.all(`SELECT * FROM Blog WHERE category = ? AND username = ?`, [category, username]);
+            res = await client.query(`SELECT * FROM "Blog" WHERE category = $1 AND username = $2`, [category, username]);
         } else if (category) {
-            rows = await db.all(`SELECT * FROM Blog WHERE category = ?`, [category]);
+            res = await client.query(`SELECT * FROM "Blog" WHERE category = $1`, [category]);
         } else if (username) {
-            rows = await db.all(`SELECT * FROM Blog WHERE username = ?`, [username]);
+            res = await client.query(`SELECT * FROM "Blog" WHERE username = $1`, [username]);
         } else {
-            rows = await db.all(`SELECT * FROM Blog`);
+            res = await client.query(`SELECT * FROM "Blog"`);
         }
+        let rows = res.rows;
+
+        client.release();
+
         return NextResponse.json(rows, { status: 200 });
     } catch (err) {
         console.error(err);
-        return NextResponse.json({ error: 'Error fetching blogs from database' }, { status: 500 });
+        return NextResponse.json({ error: `Error fetching blogs from database, ${err.message}` }, { status: 500 });
     }
 };

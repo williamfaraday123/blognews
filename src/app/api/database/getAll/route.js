@@ -1,4 +1,4 @@
-import connectToDatabase from '@/app/api/db';
+import { pool } from '@/app/api/db';
 import { NextResponse } from "next/server";
 
 export async function GET () {
@@ -6,9 +6,10 @@ export async function GET () {
     const tableData = {};
 
     try {
-        const db = await connectToDatabase();
+        const client = await pool.connect();
         for (const table of tables) {
-            const rows = await db.all(`SELECT * FROM ${table}`);
+            const res = await client.query(`SELECT * FROM "${table}"`);
+            const rows = res.rows;
             tableData[table] = rows;
         }
 
