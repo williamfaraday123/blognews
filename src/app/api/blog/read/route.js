@@ -11,11 +11,11 @@ export async function GET (req) {
         let res;
 
         if (category && username) {
-            res = await client.query(`SELECT * FROM "Blog" WHERE category = ? AND username = ?`, [category, username]);
+            res = await client.query(`SELECT * FROM "Blog" WHERE category = $1 AND username = $2`, [category, username]);
         } else if (category) {
-            res = await client.query(`SELECT * FROM "Blog" WHERE category = ?`, [category]);
+            res = await client.query(`SELECT * FROM "Blog" WHERE category = $1`, [category]);
         } else if (username) {
-            res = await client.query(`SELECT * FROM "Blog" WHERE username = ?`, [username]);
+            res = await client.query(`SELECT * FROM "Blog" WHERE username = $1`, [username]);
         } else {
             res = await client.query(`SELECT * FROM "Blog"`);
         }
