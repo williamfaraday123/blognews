@@ -13,7 +13,9 @@ const CardList = ({ selectedCategory }) => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await fetch(`/api/blog/read?category=${selectedCategory}`);
+                const encodedCategory = encodeURIComponent(selectedCategory); //encode before sending in URL to ensure spaces and special characters are properly handled
+                
+                const response = await fetch(`/api/blog/read?category=${encodedCategory}`);
                 if (!response.ok) {
                     throw error;
                 }

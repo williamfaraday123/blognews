@@ -1,8 +1,10 @@
 "use client"
 
+import categories from "@/components/categoryList/categoryList.json";
 import { useAuth } from "@/context/AuthContext";
 import { useBlogContext } from "@/context/BlogContext";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./write.module.css";
 
@@ -35,6 +37,7 @@ const Write = () => {
 
     const { authenticated } = useAuth();
     const { toggleBlogsList } = useBlogContext();
+    const router = useRouter();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -49,6 +52,7 @@ const Write = () => {
                 const res = await axios.post('/api/blog/create', formDataToSend);
                 alert(`Blog posted successfully, ${res.data.message}`);
                 toggleBlogsList();
+                router.push('/');
             } catch (err) {
                 alert(`Error posting blog, ${err}`);
             }
@@ -70,7 +74,8 @@ const Write = () => {
                 onChange={(e) => handleChange(e, 'category')}
                 className={styles.input}
             >
-                {["style", "fashion", "food", "travel"].map((category, index) => (
+                <option value='' disabled hidden>Category</option>
+                {categories.map((category, index) => (
                     <option key={index} value={category}>{category}</option>
                 ))}
             </select>

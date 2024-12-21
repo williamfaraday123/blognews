@@ -1,4 +1,4 @@
-import connectToDatabase from "@/app/api/db";
+import { pool } from "@/app/api/db";
 import { NextResponse } from "next/server";
 
 export async function POST (req) {
@@ -7,15 +7,15 @@ export async function POST (req) {
         const { username, password } = formData;
 
         //open database
-        const db = await connectToDatabase();
+        const client = await pool.connect();
 
         //check user exists
-        const userExists = await db.get(
-            'SELECT * FROM User WHERE username = ? AND password = ?',
+        const res = await client.query(
+            'SELECT * FROM "User" WHERE username = $1 AND password = $2',
             [username, password]
         );
 
-        if (!userExists) {
+        if (res.rows.length === 0) {
             return NextResponse.json({ error: 'User with this username and password does not exist' }, { status: 404 });
         }
 

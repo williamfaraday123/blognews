@@ -1,6 +1,8 @@
 "use client"
 
+import categories from "@/components/categoryList/categoryList.json";
 import Comments from "@/components/comments/Comments";
+import Likes from "@/components/likes";
 import { useBlogContext } from "@/context/BlogContext";
 import axios from "axios";
 import { useState } from "react";
@@ -29,10 +31,22 @@ const Card = ({ blog }) => {
     };
 
     const handleChange = (e, field) => {
-        setEditFormData((prevFields) => ({
-            ...prevFields,
-            [field]: e.target.value
-        }));
+        if (field === 'image') {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                setEditFormData((prevData) => ({
+                    ...prevData,
+                    [field]: reader.result
+                }));
+            };
+        } else {
+            setEditFormData((prevFields) => ({
+                ...prevFields,
+                [field]: e.target.value
+            }));
+        }
     };
 
     const token = localStorage.getItem('token');
@@ -81,6 +95,7 @@ const Card = ({ blog }) => {
                     <span className={styles.username}>{blog?.username}</span>
                     <span className={styles.date}>{blog?.publishDate}</span>
                 </div>
+                <Likes BlogID={blog?.id} />
                 <div>
                     <button onClick={toggleViewDescription} className={styles.button}>Read More</button>
                     {viewDescription && (
@@ -119,10 +134,17 @@ const Card = ({ blog }) => {
                                     onChange={(e) => handleChange(e, 'category')}
                                     className={styles.input}
                                 >
-                                    {["style", "fashion", "food", "travel"].map((category, index) => (
+                                    {categories.map((category, index) => (
                                         <option key={index} value={category}>{category}</option>
                                     ))}
                                 </select>
+                            </div>
+                            <div>
+                                <label>image</label>
+                                <input
+                                    type="file"
+                                    onChange={(e) => handleChange(e, 'image')}
+                                />
                             </div>
                             <div>
                                 <label>description</label>
