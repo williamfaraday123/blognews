@@ -7,7 +7,7 @@ export async function GET (req) {
         const BlogID = searchParams.get('BlogID');
 
         if (!BlogID) {
-            return NextResponse.json({ error: 'BlogID is required' });
+            return NextResponse.json({ error: 'BlogID is required' }, { status: 400 });
         }
         
         const client = await pool.connect();

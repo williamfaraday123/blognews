@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS "Like" (
     username TEXT NOT NULL,
     FOREIGN KEY (BlogID) REFERENCES "Blog"(id),
     FOREIGN KEY (username) REFERENCES "User"(username),
-    UNIQUE(blog_id, username)
+    UNIQUE(BlogID, username)
 );
 
 -- 2nd blog table
@@ -171,7 +171,7 @@ BEGIN
     ) THEN
         DROP TRIGGER IF EXISTS deleteUserTrigger ON "User";
         CREATE TRIGGER deleteUserTrigger
-        AFTER DELETE ON "User"
+        BEFORE DELETE ON "User"
         FOR EACH ROW
         EXECUTE FUNCTION delete_user_related();
     END IF;
@@ -186,7 +186,7 @@ BEGIN
     ) THEN
         DROP TRIGGER IF EXISTS deleteBlogTrigger ON "Blog";
         CREATE TRIGGER deleteBlogTrigger
-        AFTER DELETE ON "Blog"
+        BEFORE DELETE ON "Blog"
         FOR EACH ROW
         EXECUTE FUNCTION delete_blog_related();
     END IF;
@@ -216,7 +216,7 @@ BEGIN
     ) THEN
         DROP TRIGGER IF EXISTS deleteLikeTrigger ON "Like";
         CREATE TRIGGER deleteLikeTrigger
-        AFTER DELETE ON "Like"
+        BEFORE DELETE ON "Like"
         FOR EACH ROW
         EXECUTE FUNCTION delete_like_related();
     END IF;
