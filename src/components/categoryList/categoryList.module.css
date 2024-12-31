@@ -16,9 +16,10 @@
 
 .categories {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
     gap: 10px;
-    justify-content: center;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .category {
@@ -30,6 +31,7 @@
     font-size: 1em;
     text-transform: capitalize;
     transition: background-color 0.2s;
+    flex-shrink: 0;
 }
 
 .category:hover {
