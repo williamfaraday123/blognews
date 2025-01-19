@@ -5,6 +5,7 @@ import Comments from "@/components/comments/Comments";
 import Likes from "@/components/likes";
 import { useBlogContext } from "@/context/BlogContext";
 import axios from "axios";
+import Link from "next/link";
 import { useState } from "react";
 import styles from "./card.module.css";
 
@@ -92,7 +93,9 @@ const Card = ({ blog }) => {
                 <span className={styles.category}>{blog?.category}</span>
                 <h3 className={styles.postTitle}>{blog?.title}</h3>
                 <div className={styles.detail}>
-                    <span className={styles.username}>{blog?.username}</span>
+                    <Link href={`/user/${blog?.username}`}>
+                        <span className={styles.username}>{blog?.username}</span>
+                    </Link>
                     <span className={styles.date}>{blog?.publishDate}</span>
                 </div>
                 <Likes BlogID={blog?.id} />
