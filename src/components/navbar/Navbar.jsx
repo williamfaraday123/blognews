@@ -6,9 +6,9 @@ import styles from "./navbar.module.css";
 const Navbar = () => {
     return (
         <div className={styles.container}>
-            <div className={styles.logo}>Isaac BlogNews App</div>
+            <div className={styles.logo}>mytravelblog</div>
             <p className={styles.description}>
-                <b>This is a blog news app created by Isaac</b>
+                <b>Share your travel experiences here</b>
             </p>
             <div className={styles.links}>
                 <ThemeToggle />

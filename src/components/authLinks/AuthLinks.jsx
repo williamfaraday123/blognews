@@ -13,7 +13,7 @@ const AuthLinks = () => {
             {!authenticated ? (
                 <>
                     <Link href="/login" className={styles.link}>Login</Link>
-                    <Link href="/register" className={styles.link}>Register</Link>
+                    <Link href="/register" className={styles.link}>Create Account</Link>
                 </>
             ) : (
                 <>

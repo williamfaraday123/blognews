@@ -1,6 +1,7 @@
 "use client"
 
 import categories from "@/components/categoryList/categoryList.json";
+import Location from "@/components/location";
 import { useAuth } from "@/context/AuthContext";
 import { useBlogContext } from "@/context/BlogContext";
 import axios from "axios";
@@ -14,6 +15,7 @@ const Write = () => {
         category: '',
         image: null,
         description: '',
+        location: null
     });
 
     const handleChange = (e, field) => {
@@ -27,6 +29,11 @@ const Write = () => {
                     [field]: reader.result
                 }));
             };
+        } else if (field == 'location') {
+            setFormData((prevData) => ({
+                ...prevData,
+                [field]: e,
+            }));
         } else {
             setFormData((prevData) => ({
                 ...prevData,
@@ -91,6 +98,7 @@ const Write = () => {
                     onChange={(e) => handleChange(e, 'description')}
                     className={styles.input}
                 />
+                <Location selectedSearchOption={formData.location} setSelectedSearchOption={(e) => handleChange(e, 'location')} />
                 <button className={styles.button} onClick={handleSubmit}>Publish</button>
             </div>
         </div>

@@ -1,0 +1,14 @@
+/* Add this CSS code */
+.input {
+    color: #000; /* Change the text color to black */
+    background-color: #fff; /* Keep the background color white */
+    border: 1px solid #ccc; /* Add a light border */
+    padding: 8px; /* Add some padding for better spacing */
+    font-size: 16px; /* Increase the font size for better readability */
+    border-radius: 4px; /* Add rounded corners */
+    width: 100%; /* Make the input box take the full width of its container */
+}
+
+.input::placeholder {
+    color: #888; /* Change the placeholder text color to a lighter shade */
+}

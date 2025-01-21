@@ -69,6 +69,17 @@ CREATE TABLE IF NOT EXISTS "Blog" (
     FOREIGN KEY (username) REFERENCES "User"(username)
 );
 
+-- Location
+CREATE TABLE IF NOT EXISTS "Location" (
+    id SERIAL PRIMARY KEY,
+    BlogID INTEGER NOT NULL,
+    latitude FLOAT NOT NULL,
+    longitude FLOAT NOT NULL,
+    country TEXT NOT NULL,
+    name TEXT NOT NULL,
+    FOREIGN KEY (BlogID) REFERENCES "Blog"(id)
+);
+
 -- Comment
 CREATE TABLE IF NOT EXISTS "Comment" (
     id SERIAL PRIMARY KEY,
@@ -124,6 +135,7 @@ BEGIN
     DELETE FROM "Comment" WHERE BlogID = OLD.id;
     DELETE FROM "Like" WHERE BlogID = OLD.id;
     DELETE FROM "BlogLikes" WHERE BlogID = OLD.id;
+    DELETE FROM "Location" WHERE BlogID = OLD.id;
     RETURN OLD;
 END;
 $$ LANGUAGE plpgsql;

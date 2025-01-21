@@ -4,22 +4,44 @@ import { NextResponse } from "next/server";
 export async function POST (req) {
     try {
         const formData = await req.json();
-        const { title, category, description, image, username } = formData;
+        const { title, category, description, image, location, username } = formData;
         const publishDate = new Date().toISOString();
-
-        console.log(username, publishDate, title, category, description, image);
+        
+        console.log(username, publishDate, title, category, description, image, location);
         const client = await pool.connect();
 
-        await client.query(
-            'INSERT INTO "Blog" (username, publishDate, title, category, description, image) VALUES ($1, $2, $3, $4, $5, $6)',
-            [username, publishDate, title, category, description, image]
-        );
+        try {
+            await client.query('BEGIN');
 
-        client.release();
+            //Insert into Blog table
+            const blogResult = await client.query(
+                'INSERT INTO "Blog" (username, publishDate, title, category, description, image) VALUES ($1, $2, $3, $4, $5, $6)',
+                [username, publishDate, title, category, description, image]
+            );
+            const BlogID = blogResult.rows[0].id;
 
-        return NextResponse.json({ message: 'Blog post created successfully!' }, { status: 201 });
+            //Insert into Location table
+            if (location) {
+                const latitude = location?.geometry?.coordinates[1];
+                const longitude = location?.geometry?.coordinates[0];
+                const country = location?.properties?.country;
+                const name = location?.properties?.name;
+                await client.query(
+                    'INSERT INTO "Location" (BlogID, latitude, longitude, country, name) VALUES ($1, $2, $3, $4, $5)',
+                    [BlogID, latitude, longitude, country, name]
+                );
+            }
+
+            await client.query('COMMIT');
+            return NextResponse.json({ message: 'Blog post created successfully!' }, { status: 201 });
+        } catch (err) {
+            await client.query('ROLLBACK');
+            throw err;
+        } finally {
+            client.release();
+        }
     } catch (error) {
-        console.error(error);
+        console.error('Database insertion error:',  error.message, error.stack);
         return NextResponse.json({ error: 'Database error' }, { status: 500 });
     }
 }
