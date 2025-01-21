@@ -28,7 +28,7 @@ const LoginPage = () => {
         e.preventDefault();
         try {
             const res = await axios.post('/api/user/login', formData);
-            alert(`formData posted successfully, ${JSON.stringify(res?.data?.message)}`);
+            alert(`Successful Login, ${JSON.stringify(res?.data?.message)}`);
             login(formData["username"]);
             router.push('/');
         } catch (error) {

@@ -31,7 +31,7 @@ const RegisterPage = () => {
         try {
             const res = await axios.post('/api/user/register', formData);
             console.log(res.data);
-            alert(`formData posted successfully, ${JSON.stringify(res.data.message)}`);
+            alert(`Successful registration, ${JSON.stringify(res.data.message)}`);
             router.push('/login');
         } catch (err) {
             alert(`Error posting formData, ${err}`);

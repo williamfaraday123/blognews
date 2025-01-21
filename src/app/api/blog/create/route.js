@@ -15,7 +15,7 @@ export async function POST (req) {
 
             //Insert into Blog table
             const blogResult = await client.query(
-                'INSERT INTO "Blog" (username, publishDate, title, category, description, image) VALUES ($1, $2, $3, $4, $5, $6)',
+                'INSERT INTO "Blog" (username, publishDate, title, category, description, image) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
                 [username, publishDate, title, category, description, image]
             );
             const BlogID = blogResult.rows[0].id;
