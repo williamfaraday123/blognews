@@ -1,5 +1,6 @@
 "use client"
 
+import BlogLocation from "@/components/blogLocation";
 import categories from "@/components/categoryList/categoryList.json";
 import Comments from "@/components/comments/Comments";
 import Likes from "@/components/likes";
@@ -99,6 +100,7 @@ const Card = ({ blog }) => {
                     <span className={styles.date}>{blog?.publishDate}</span>
                 </div>
                 <Likes BlogID={blog?.id} />
+                <BlogLocation BlogID={blog?.id} />
                 <div>
                     <button onClick={toggleViewDescription} className={styles.button}>Read More</button>
                     {viewDescription && (
