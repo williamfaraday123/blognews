@@ -1,0 +1,58 @@
+.regionsSearchContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Space between label and dropdown */
+    padding: 0.5rem 1rem; /* Add padding to the container */
+    border: 1px solid #ddd; /* Light border for structure */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f8f9fa; /* Subtle background color */
+    max-width: 300px; /* Optional: Limit width for dropdown */
+}
+
+.regionsSearchLabel {
+    font-size: 1rem; /* Slightly larger label text */
+    font-weight: 500; /* Medium font weight for better visibility */
+    color: #333; /* Dark gray for the label text */
+}
+
+.regionsSearchList {
+    width: 100%; /* Full width for dropdown */
+    padding: 0.5rem; /* Padding inside the dropdown */
+    font-size: 1rem; /* Font size matching label */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 4px; /* Rounded corners for the dropdown */
+    background-color: #fff; /* White background */
+    color: #333; /* Dark gray text */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    transition: border-color 0.2s ease-in-out; /* Smooth transition on hover/focus */
+}
+
+.regionsSearchList:focus {
+    border-color: #007bff; /* Highlighted border on focus */
+    outline: none; /* Remove default outline */
+}
+
+.regionsSearchItem {
+    padding: 0.5rem; /* Padding inside options */
+    font-size: 1rem; /* Match dropdown font size */
+    color: #333; /* Dark text color for options */
+    background-color: #fff; /* White background */
+}
+
+/* Add hover effect for dropdown items */
+.regionsSearchItem:hover {
+    background-color: #f1f1f1; /* Light gray hover background */
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .regionsSearchContainer {
+        max-width: 100%; /* Ensure it takes full width on smaller screens */
+        padding: 0.5rem; /* Adjust padding */
+    }
+
+    .regionsSearchLabel,
+    .regionsSearchList {
+        font-size: 0.9rem; /* Slightly smaller font size */
+    }
+}

@@ -1,0 +1,21 @@
+.locationFiltersContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensure spacing between items */
+    gap: 1rem; /* Optional: Add space between the components */
+    padding: 0.5rem 1rem; /* Optional: Add some padding around the container */
+    background-color: #f8f9fa; /* Optional: Background color for a header-like appearance */
+    border: 1px solid #ddd; /* Optional: Add a border for separation */
+    border-radius: 8px; /* Optional: Rounded corners */
+}
+
+.locationFiltersContainer > * {
+    flex: 1; /* Ensure components take equal width by default */
+}
+
+@media (max-width: 768px) {
+    .locationFiltersContainer {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: stretch;
+    }
+}

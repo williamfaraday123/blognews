@@ -1,6 +1,7 @@
 "use client"
 
 import { useBlogContext } from "@/context/BlogContext";
+import { useLocationContext } from "@/context/LocationContext";
 import { useEffect, useState } from "react";
 import Card from "../card/Card";
 import styles from "./menuPosts.module.css";
@@ -10,16 +11,19 @@ const MenuPosts = () => {
     const [loading, setLoading] = useState(true);
     
     const { blogsChanged } = useBlogContext();
+    const { locationFilters } = useLocationContext();
 
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await fetch("/api/blog/read");
+                const locationFiltersParams = new URLSearchParams(locationFilters).toString();
+                const response = await fetch(`/api/blog/read?${locationFiltersParams}`);
                 if (!response.ok) {
                     throw error;
                 }
                 const rows = await response.json();
                 setBlogs(rows);
+                console.log(blogs);
             } catch (err) {
                 alert(`Cannot fetch blogs: ${err.message}`);
             } finally {
@@ -28,7 +32,7 @@ const MenuPosts = () => {
         };
 
         fetchBlogs();
-    }, [blogsChanged]);
+    }, [blogsChanged, locationFilters]);
 
     if (loading) {
         return <div>Loading MenuPosts...</div>;

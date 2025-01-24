@@ -2,6 +2,7 @@
 
 import CardList from "@/components/cardList/CardList";
 import CategoryList from "@/components/categoryList/CategoryList";
+import LocationFilters from "@/components/locationFilters";
 import MenuPosts from "@/components/MenuPosts/MenuPosts";
 import { useState } from "react";
 import styles from "./menu.module.css";
@@ -13,6 +14,7 @@ const Menu = () => {
     };
     return (
         <div className={styles.container}>
+            <LocationFilters />
             <h1 className={styles.title}>Most Popular</h1>
             <MenuPosts />
             <CategoryList handleSelectCategory={handleSelectCategory} />

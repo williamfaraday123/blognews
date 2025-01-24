@@ -1,0 +1,75 @@
+[
+    {
+        "region": "All Continents and Oceans",
+        "minLatitude": null,
+        "maxLatitude": null,
+        "minLongitude": null,
+        "maxLongitude": null
+    }, { 
+        "region": "North America",
+        "minLatitude": 5.0,
+        "maxLatitude": 83.0,
+        "minLongitude": -168.0,
+        "maxLongitude": -52.0
+    }, {
+        "region": "South America",
+        "minLatitude": -55.0,
+        "maxLatitude": 12.0,
+        "minLongitude": -81.0,
+        "maxLongitude": -34.0
+    }, {
+        "region": "Europe",
+        "minLatitude": 35.0,
+        "maxLatitude": 71.0,
+        "minLongitude": -25.0,
+        "maxLongitude": 45.0
+    }, {
+        "region": "Africa",
+        "minLatitude": -35.0,
+        "maxLatitude": 37.0,
+        "minLongitude": -17.0,
+        "maxLongitude": 51.0
+    }, {
+        "region": "Asia",
+        "minLatitude": -10.0,
+        "maxLatitude": 81.0,
+        "minLongitude": 26.0,
+        "maxLongitude": 180.0
+    }, {
+        "region": "Australia",
+        "minLatitude": -44.0,
+        "maxLatitude": -10.0,
+        "minLongitude": 112.0,
+        "maxLongitude": 154.0
+    }, {
+        "region": "Antarctica",
+        "minLatitude": -90.0,
+        "maxLatitude": -60.0,
+        "minLongitude": -180.0,
+        "maxLongitude": 180.0
+    }, {
+        "region": "Arctic Ocean",
+        "minLatitude": 65.0,
+        "maxLatitude": 90.0,
+        "minLongitude": -180.0,
+        "maxLongitude": 180.0
+    }, {
+        "region": "Indian Ocean",
+        "minLatitude": -60.0,
+        "maxLatitude": 30.0,
+        "minLongitude": 20.0,
+        "maxLongitude": 146.0
+    }, {
+        "region": "Pacific Ocean",
+        "minLatitude": -60.0,
+        "maxLatitude": 65.0,
+        "minLongitude": 110.0,
+        "maxLongitude": -70.0
+    }, {
+        "region": "Atlantic Ocean",
+        "minLatitude": -60.0,
+        "maxLatitude": 70.0,
+        "minLongitude": -80.0,
+        "maxLongitude": 20.0
+    }
+]

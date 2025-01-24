@@ -2,6 +2,7 @@ import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/navbar/Navbar";
 import { AuthProvider } from "@/context/AuthContext";
 import { BlogContextProvider } from "@/context/BlogContext";
+import { LocationProvider } from "@/context/LocationContext";
 import { ThemeContextProvider } from "@/context/ThemeContext";
 import ThemeProvider from "@/providers/ThemeProvider";
 import localFont from "next/font/local";
@@ -33,13 +34,15 @@ export default function RootLayout({ children }) {
           <ThemeContextProvider>
             <ThemeProvider>
               <BlogContextProvider>
-                <div className="container">
-                  <div className="wrapper">
-                    <Navbar />
-                    {children}
-                    <Footer />
+                <LocationProvider>
+                  <div className="container">
+                    <div className="wrapper">
+                      <Navbar />
+                      {children}
+                      <Footer />
+                    </div>
                   </div>
-                </div>
+                </LocationProvider>
               </BlogContextProvider>
             </ThemeProvider>
           </ThemeContextProvider>
