@@ -13,22 +13,27 @@ const Write = () => {
     const [formData, setFormData] = useState({
         title: '',
         category: '',
-        image: null,
+        images: [],
         description: '',
         location: null
     });
 
     const handleChange = (e, field) => {
-        if (field == 'image') {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
+        if (field == 'images') {
+            const files = Array.from(e.target.files);
+            const readers = files.map((file) => {
+                const reader = new FileReader();
+                return new Promise((resolve) => {
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.readAsDataURL(file);
+                });
+            });
+            Promise.all(readers).then((results) => {
                 setFormData((prevData) => ({
                     ...prevData,
-                    [field]: reader.result
+                    [field]: [...prevData.images, ...results]
                 }));
-            };
+            });
         } else if (field == 'location') {
             setFormData((prevData) => ({
                 ...prevData,
@@ -89,7 +94,8 @@ const Write = () => {
             <div className={styles.editor}>
                 <input
                     type="file"
-                    onChange={(e) => handleChange(e, 'image')}
+                    multiple
+                    onChange={(e) => handleChange(e, 'images')}
                     className={styles.file}
                 />
                 <textarea

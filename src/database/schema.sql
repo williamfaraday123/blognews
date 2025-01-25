@@ -65,7 +65,6 @@ CREATE TABLE IF NOT EXISTS "Blog" (
     title TEXT NOT NULL,
     category TEXT NOT NULL,
     description TEXT NOT NULL,
-    image TEXT,
     FOREIGN KEY (username) REFERENCES "User"(username)
 );
 
@@ -107,6 +106,14 @@ CREATE TABLE IF NOT EXISTS "BlogLikes" (
     likes INTEGER NOT NULL DEFAULT 0
 );
 
+-- Image
+CREATE TABLE IF NOT EXISTS "Image" (
+    id SERIAL PRIMARY KEY,
+    BlogID INTEGER NOT NULL,
+    image TEXT NOT NULL,
+    FOREIGN KEY (BlogID) REFERENCES "Blog"(id) ON DELETE CASCADE
+);
+
 CREATE INDEX IF NOT EXISTS idx_blog_username ON "Blog"(username);
 
 -- Trigger function for inserting a new row in BlogLikes with same id when a new row is inserted into Blog
@@ -136,6 +143,7 @@ BEGIN
     DELETE FROM "Like" WHERE BlogID = OLD.id;
     DELETE FROM "BlogLikes" WHERE BlogID = OLD.id;
     DELETE FROM "Location" WHERE BlogID = OLD.id;
+    DELETE FROM "Image" WHERE BlogID = OLD.id;
     RETURN OLD;
 END;
 $$ LANGUAGE plpgsql;

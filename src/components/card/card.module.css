@@ -17,6 +17,16 @@
     transform: translateY(-5px);
 }
 
+.container .fullscreenActive {
+    pointer-events: none; /* Prevent hover and click interactions */
+    transform: none; /* Disable hover transform */
+    background-color: var(--card-background-color); /* Ensure consistent background */
+}
+
+.container .fullscreenActive:hover {
+    transform: none; /* Ensure no hover effect occurs */
+}
+
 .imageContainer {
     width: 100%;
     height: 200px;

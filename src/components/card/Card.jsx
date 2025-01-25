@@ -1,6 +1,7 @@
 "use client"
 
 import BlogLocation from "@/components/blogLocation";
+import CardImages from "@/components/cardImages/CardImages";
 import categories from "@/components/categoryList/categoryList.json";
 import Comments from "@/components/comments/Comments";
 import Likes from "@/components/likes";
@@ -17,8 +18,7 @@ const Card = ({ blog }) => {
     const [editFormData, setEditFormData] = useState({
         title: blog?.title,
         category: blog?.category,
-        description: blog?.description,
-        image: blog?.image
+        description: blog?.description
     });
 
     const { toggleBlogsList } = useBlogContext();
@@ -33,22 +33,10 @@ const Card = ({ blog }) => {
     };
 
     const handleChange = (e, field) => {
-        if (field === 'image') {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                setEditFormData((prevData) => ({
-                    ...prevData,
-                    [field]: reader.result
-                }));
-            };
-        } else {
-            setEditFormData((prevFields) => ({
-                ...prevFields,
-                [field]: e.target.value
-            }));
-        }
+        setEditFormData((prevFields) => ({
+            ...prevFields,
+            [field]: e.target.value
+        }));
     };
 
     const token = localStorage.getItem('token');
@@ -84,11 +72,7 @@ const Card = ({ blog }) => {
     return (
         <div className={styles.container}>
             <div className={styles.imageContainer}>
-                <img
-                    src={blog?.image}
-                    alt=""
-                    className={styles.image}
-                />
+                <CardImages BlogID={blog?.id} />
             </div>
             <div className={styles.textContainer}>
                 <span className={styles.category}>{blog?.category}</span>
@@ -143,13 +127,6 @@ const Card = ({ blog }) => {
                                         <option key={index} value={category}>{category}</option>
                                     ))}
                                 </select>
-                            </div>
-                            <div>
-                                <label>image</label>
-                                <input
-                                    type="file"
-                                    onChange={(e) => handleChange(e, 'image')}
-                                />
                             </div>
                             <div>
                                 <label>description</label>

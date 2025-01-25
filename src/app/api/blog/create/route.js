@@ -4,10 +4,10 @@ import { NextResponse } from "next/server";
 export async function POST (req) {
     try {
         const formData = await req.json();
-        const { title, category, description, image, location, username } = formData;
+        const { title, category, description, images, location, username } = formData;
         const publishDate = new Date().toISOString();
         
-        console.log(username, publishDate, title, category, description, image, location);
+        console.log(username, publishDate, title, category, description, images, location);
         const client = await pool.connect();
 
         try {
@@ -15,11 +15,22 @@ export async function POST (req) {
 
             //Insert into Blog table
             const blogResult = await client.query(
-                'INSERT INTO "Blog" (username, publishDate, title, category, description, image) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
-                [username, publishDate, title, category, description, image]
+                'INSERT INTO "Blog" (username, publishDate, title, category, description) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+                [username, publishDate, title, category, description]
             );
             const BlogID = blogResult.rows[0].id;
 
+            //Insert into Image table
+            if (images && images.length > 0) {
+                const imageQueries = images.map((image) =>
+                    client.query(
+                        `INSERT INTO "Image" (BlogID, image) VALUES ($1, $2)`,
+                        [BlogID, image]
+                    )
+                );
+                await Promise.all(imageQueries);
+            }
+            
             //Insert into Location table
             if (location) {
                 const latitude = location?.geometry?.coordinates[1];
