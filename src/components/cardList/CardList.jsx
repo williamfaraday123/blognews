@@ -33,7 +33,7 @@ const CardList = ({ selectedCategory }) => {
 
         if (selectedCategory)
             fetchBlogs();
-    }, [selectedCategory, blogsChanged]);
+    }, [selectedCategory, blogsChanged, locationFilters]);
 
     if (loading) {
         return <div>Loading CardList...</div>;
