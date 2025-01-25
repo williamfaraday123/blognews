@@ -1,61 +1,11 @@
-/* .countrySearchContainer {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-}
-
-.countrySearchLabel {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
-    color: #333;
-}
-
-.countrySearchInput {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    font-size: 16px;
-}
-
-.countrySearchList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.countrySearchItem {
-    padding: 10px;
-    cursor: pointer;
-    border-bottom: 1px solid #ccc;
-}
-
-.countrySearchItem:hover {
-    background-color: #eee;
-}
-
-.countrySearchItem:last-child {
-    border-bottom: none;
-}
- */
-
-
 .countrySearchContainer {
     display: flex;
     flex-direction: column;
     gap: 0.5rem; /* Space between label, input, and list */
     padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    background-color: #f8f9fa;
+    background-color: var(--background-color);
     max-width: 400px; /* Optional: Limit the container width */
     position: relative; /* Ensure the dropdown stays within bounds */
 }
@@ -63,14 +13,15 @@
 .countrySearchLabel {
     font-size: 1rem;
     font-weight: 500;
-    color: #333;
+    color: var(--text-color);
 }
 
 .countrySearchInput {
+    background-color: var(--background-color);
     width: 100%; /* Full width for input */
     padding: 0.5rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     outline: none;
     transition: border-color 0.2s ease-in-out;
@@ -87,9 +38,8 @@
     padding: 0;
     max-height: 200px; /* Limit the height of the dropdown */
     overflow-y: auto; /* Add scroll if items exceed max height */
-    border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #fff;
+    background-color: var(--background-color);
     position: absolute;
     top: 100%; /* Position below the input */
     left: 0;
@@ -101,13 +51,14 @@
 .countrySearchItem {
     padding: 0.5rem;
     font-size: 1rem;
-    color: #333;
+    color: var(--text-color);
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 }
 
 .countrySearchItem:hover {
     background-color: #f1f1f1; /* Light gray background on hover */
+    color: #999;
 }
 
 /* Style for no results */

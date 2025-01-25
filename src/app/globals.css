@@ -24,14 +24,6 @@ a {
   color: inherit;
   text-decoration: none;
 }
-/* 
-.dark {
-  --bg: #0f172a;
-  --textColor: #ddd;
-  --softBg: #1f273a;
-  --softTextColor: black;
-}
- */
 
 .dark {
   --bg: #343a40;
@@ -41,15 +33,6 @@ a {
   --primary-color-hover: #0b5ed7;
   --card-background-color: #495057;
 }
-
-/* 
-.light {
-  --bg: white;
-  --textColor: black;
-  --softBg: #f0f0f0;
-  --softTextColor: black;
-}
- */
 
 .light {
   --bg: #f8f9fa;

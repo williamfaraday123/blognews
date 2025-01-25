@@ -4,9 +4,11 @@
     justify-content: space-between; /* Ensure spacing between items */
     gap: 1rem; /* Optional: Add space between the components */
     padding: 0.5rem 1rem; /* Optional: Add some padding around the container */
-    background-color: #f8f9fa; /* Optional: Background color for a header-like appearance */
-    border: 1px solid #ddd; /* Optional: Add a border for separation */
+    background-color: var(--background-color); /* Optional: Background color for a header-like appearance */
+    color: var(--text-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a border for separation */
     border-radius: 8px; /* Optional: Rounded corners */
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .locationFiltersContainer > * {

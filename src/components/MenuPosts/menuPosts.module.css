@@ -9,6 +9,10 @@
     scroll-snap-type: x mandatory;
 }
 
+.items:empty::before {
+    content: "No matching blogs found.";
+}
+
 .item {
     flex: 0 0 auto;
     border-radius: 10px;
