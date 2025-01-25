@@ -1,3 +1,4 @@
+import AdSense from "@/components/ads/AdSense";
 import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/navbar/Navbar";
 import { AuthProvider } from "@/context/AuthContext";
@@ -27,6 +28,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <AdSense />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
