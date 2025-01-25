@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <AdSense />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
