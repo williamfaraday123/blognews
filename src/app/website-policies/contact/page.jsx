@@ -31,8 +31,8 @@ const Contact = () => {
             <div>
                 <h2 className={styles.subtitle}>Contact Information:</h2>
                 <ul className={styles.items}>
-                    <li className={styles.item}>Email:
-                        <a href="mailto:isaa0015@e.ntu.edu.sg" className={styles.link}>isaa0015@e.ntu.edu.sg</a>
+                    <li className={styles.item}>
+                        <a href="mailto:isaa0015@e.ntu.edu.sg" className={styles.link}>Email</a>
                     </li>
                 </ul>
             </div>

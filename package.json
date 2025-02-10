@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@azure/storage-blob": "^12.26.0",
     "@neondatabase/serverless": "^0.10.4",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "fs": "^0.0.1-security",
+    "get-stream": "^9.0.1",
     "next": "15.0.4",
     "nodemailer": "^6.10.0",
     "path": "^0.12.7",

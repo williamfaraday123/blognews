@@ -21,8 +21,9 @@ export async function POST (req) {
             const BlogID = blogResult.rows[0].id;
 
             //Insert into Image table
-            if (images && images.length > 0) {
-                const imageQueries = images.map((image) =>
+            const validImages = images.filter(image => image !== null); //filter out null values from images array
+            if (validImages && validImages.length > 0) {
+                const imageQueries = validImages.map((image) =>
                     client.query(
                         `INSERT INTO "Image" (BlogID, image) VALUES ($1, $2)`,
                         [BlogID, image]

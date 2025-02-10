@@ -9,6 +9,22 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./write.module.css";
 
+const uploadImageToServer = async (file) => {
+    try {
+        const res = await fetch(`/api/upload?fileName=${file.name}&fileType=${file.type}`, {
+            method: "POST",
+            body: file, //send raw file (not formdata)
+            
+        });
+        
+        const { url } = await res.json();
+        return url;
+    } catch (err) {
+        alert(`Image upload failed, ${err.message}`);
+        return null;
+    }
+};
+
 const Write = () => {
     const [formData, setFormData] = useState({
         title: '',
@@ -20,7 +36,7 @@ const Write = () => {
 
     const handleChange = (e, field) => {
         if (field == 'images') {
-            const files = Array.from(e.target.files);
+/*             const files = Array.from(e.target.files);
             const readers = files.map((file) => {
                 const reader = new FileReader();
                 return new Promise((resolve) => {
@@ -33,7 +49,12 @@ const Write = () => {
                     ...prevData,
                     [field]: [...prevData.images, ...results]
                 }));
-            });
+            }); */
+            const files = Array.from(e.target.files);
+            setFormData((prevData) => ({
+                ...prevData,
+                [field]: [...files]
+            }));
         } else if (field == 'location') {
             setFormData((prevData) => ({
                 ...prevData,
@@ -60,13 +81,19 @@ const Write = () => {
                     ...formData,
                     username: token
                 };
+
+                //upload images to Azure blob storage and get URLs
+                const imageUrls = await Promise.all(formData.images?.map((image) => uploadImageToServer(image)));
+                // Update formDataToSend with image URLs
+                formDataToSend.images = imageUrls;
+
                 console.log(formDataToSend);
                 const res = await axios.post('/api/blog/create', formDataToSend);
                 alert(`Blog posted successfully, ${res.data.message}`);
                 toggleBlogsList();
                 router.push('/');
             } catch (err) {
-                alert(`Error posting blog, ${err}`);
+                alert(`Error posting blog, ${err.message}`);
             }
         } else {
             alert('Not logged in');

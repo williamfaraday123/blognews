@@ -18,6 +18,7 @@ const CardImages = ({ BlogID }) => {
                 }
                 const rows = await response.json();
                 setImages(rows);
+                console.log(`images:`, rows);
             } catch (error) {
                 alert(`Error in fetching images ${error.message}`);
             } finally {

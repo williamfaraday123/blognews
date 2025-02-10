@@ -114,6 +114,12 @@ CREATE TABLE IF NOT EXISTS "Image" (
     FOREIGN KEY (BlogID) REFERENCES "Blog"(id) ON DELETE CASCADE
 );
 
+-- temporary queue for image deletion from Azure Blob storage
+CREATE TABLE IF NOT EXISTS "ImageDeletionQueue" (
+    id SERIAL PRIMARY KEY,
+    imageBlobName TEXT NOT NULL
+);
+
 CREATE INDEX IF NOT EXISTS idx_blog_username ON "Blog"(username);
 
 -- Trigger function for inserting a new row in BlogLikes with same id when a new row is inserted into Blog
@@ -164,6 +170,15 @@ BEGIN
     UPDATE "BlogLikes"
     SET likes = likes - 1
     WHERE BlogID = OLD.BlogID;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger function upon Image deletion
+CREATE OR REPLACE FUNCTION delete_image_related() RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO "ImageDeletionQueue" (imageBlobName)
+    VALUES (OLD.image);
     RETURN OLD;
 END;
 $$ LANGUAGE plpgsql;
@@ -239,6 +254,21 @@ BEGIN
         BEFORE DELETE ON "Like"
         FOR EACH ROW
         EXECUTE FUNCTION delete_like_related();
+    END IF;
+END;
+$$;
+
+--Trigger upon deleting a row in Image
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_trigger WHERE tgname = 'deleteImageTrigger'
+    ) THEN
+        DROP TRIGGER IF EXISTS deleteImageTrigger ON "Image";
+        CREATE TRIGGER deleteImageTrigger
+        BEFORE DELETE ON "Image"
+        FOR EACH ROW
+        EXECUTE FUNCTION delete_image_related();
     END IF;
 END;
 $$;

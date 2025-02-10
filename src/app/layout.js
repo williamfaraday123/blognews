@@ -22,7 +22,7 @@ const geistMono = localFont({
 
 export const metadata = {
   title: "mytravelblog",
-  description: "Share your travel experiences",
+  description: "Explore travel destinations, share your adventures, and get inspired for your next trip with mytravelblog.",
 };
 
 export default function RootLayout({ children }) {
