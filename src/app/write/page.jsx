@@ -4,26 +4,11 @@ import categories from "@/components/categoryList/categoryList.json";
 import Location from "@/components/location";
 import { useAuth } from "@/context/AuthContext";
 import { useBlogContext } from "@/context/BlogContext";
+import { uploadImageToAzure } from "@/utils/azure";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./write.module.css";
-
-const uploadImageToServer = async (file) => {
-    try {
-        const res = await fetch(`/api/upload?fileName=${file.name}&fileType=${file.type}`, {
-            method: "POST",
-            body: file, //send raw file (not formdata)
-            
-        });
-        
-        const { url } = await res.json();
-        return url;
-    } catch (err) {
-        alert(`Image upload failed, ${err.message}`);
-        return null;
-    }
-};
 
 const Write = () => {
     const [formData, setFormData] = useState({
@@ -36,20 +21,6 @@ const Write = () => {
 
     const handleChange = (e, field) => {
         if (field == 'images') {
-/*             const files = Array.from(e.target.files);
-            const readers = files.map((file) => {
-                const reader = new FileReader();
-                return new Promise((resolve) => {
-                    reader.onloadend = () => resolve(reader.result);
-                    reader.readAsDataURL(file);
-                });
-            });
-            Promise.all(readers).then((results) => {
-                setFormData((prevData) => ({
-                    ...prevData,
-                    [field]: [...prevData.images, ...results]
-                }));
-            }); */
             const files = Array.from(e.target.files);
             setFormData((prevData) => ({
                 ...prevData,
@@ -83,7 +54,7 @@ const Write = () => {
                 };
 
                 //upload images to Azure blob storage and get URLs
-                const imageUrls = await Promise.all(formData.images?.map((image) => uploadImageToServer(image)));
+                const imageUrls = await Promise.all(formData.images?.map((image) => uploadImageToAzure(image)));
                 // Update formDataToSend with image URLs
                 formDataToSend.images = imageUrls;
 

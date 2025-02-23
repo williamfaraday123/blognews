@@ -30,7 +30,7 @@ const Comments = ({ BlogID }) => {
         };
 
         fetchComments();
-    }, [newCommentPosted]);
+    }, [BlogID, newCommentPosted]);
     
     const toggleNewCommentPosted = () => {
         setNewCommentPosted(prevState => !prevState);

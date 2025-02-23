@@ -22,7 +22,7 @@ const TermsAndConditions = () => {
             </div>
             <div>
                 <h2 className={styles.subtitle}>Disclaimer of Warranties</h2>
-                <div className={styles.description}>This website is provided "as is" without any warranties of any kind, either express or implied. We do not guarantee the accuracy, completeness, or reliability of any content.</div>
+                <div className={styles.description}>This website is provided &quot;as is&quot; without any warranties of any kind, either express or implied. We do not guarantee the accuracy, completeness, or reliability of any content.</div>
             </div>
             <div>
                 <h2 className={styles.subtitle}>Limitation of Liability</h2>

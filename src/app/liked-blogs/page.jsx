@@ -6,7 +6,7 @@ import { useBlogContext } from "@/context/BlogContext";
 import { useEffect, useState } from "react";
 import styles from './blogsPage.module.css';
 
-const blogsPage = () => {
+const BlogsPage = () => {
     const [blogs, setBlogs] = useState([]);
     const { authenticated } = useAuth();
     const { blogsChanged } = useBlogContext();
@@ -24,7 +24,7 @@ const blogsPage = () => {
         }
         if (authenticated)
             fetchBlogs();
-    }, [blogsChanged]);
+    }, [authenticated, blogsChanged]);
     
     return (
         <div className={styles.container}>
@@ -38,4 +38,4 @@ const blogsPage = () => {
     )
 };
 
-export default blogsPage;
+export default BlogsPage;

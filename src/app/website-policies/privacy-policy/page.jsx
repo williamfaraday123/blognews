@@ -8,7 +8,7 @@ const PrivacyPolicy = () => {
         <div className={styles.container}>
             <h1 className={styles.title}>Privacy Policy</h1>
             <div className={styles.description}>Effective Date: 26/01/2025</div>
-            <div className={styles.description}>Welcome to mytravelblog("we," "our," or "us"). Your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and protect your information when you visit our website.</div>
+            <div className={styles.description}>Welcome to mytravelblog(&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;). Your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and protect your information when you visit our website.</div>
             <div>
                 <h2 className={styles.subtitle}>Information We Collect</h2>
                 <div className={styles.description}>We may collect personal information that you voluntarily provide to us, including but not limited to:</div>
